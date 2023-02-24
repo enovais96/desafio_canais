@@ -1,0 +1,66 @@
+version: "3.3"
+
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        restart: unless-stopped
+        container_name: desafio_canais_web
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        depends_on:
+            - redis
+        networks:
+            - desafio_canais
+
+    nginx:
+        image: nginx:alpine
+        restart: unless-stopped
+        container_name: desafio_canais_ngix
+        ports: 
+            - "8989:80"
+        volumes: 
+            - ./:/var/www
+            - ./docker/nginx/:/etc/nginx/conf.d/
+        networks: 
+            - desafio_canais
+
+    mysql:
+        image: mysql:5.7.22
+        restart: unless-stopped
+        container_name: desafio_canais_mysql
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+        volumes:
+            - ./.docker/mysql/dbdata:/var/lib/mysql
+        ports:
+            - "3388:3306"
+        networks:
+            - desafio_canais
+
+    queue:
+        image: especializati/laravel9-app
+        restart: unless-stopped
+        container_name: desafio_canais_queue
+        command: "php artisan queue:work"
+        volumes:
+            - ./:/var/www
+        depends_on:
+            - redis
+            - app
+        networks:
+            - desafio_canais
+
+    redis:
+        image: redis:latest
+        networks:
+            - desafio_canais
+
+networks:
+    desafio_canais:
+        driver: bridge
