@@ -185,7 +185,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        App\Providers\DesafioCanaisProvider::class,
         /*
          * Application Service Providers...
          */
