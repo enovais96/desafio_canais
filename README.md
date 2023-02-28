@@ -20,3 +20,6 @@ O intuito deste projeto foi aplicar boas práticas usando laravel 9 + PHP 8 em a
 	
 # Como utilizar
 Ao final dos passos acima o projeto estará funcional e pronto para ser usado, segue a documentação das rotas: https://documenter.getpostman.com/view/13417395/2s93CSnVnY 
+
+# Considerações Finais
+Link para acesso das considerações finais do projeto: https://docs.google.com/document/d/1qPDo3Iauun3srJG2V7fH7MUQRp-ueneapriZNJopF74/edit?usp=share_link
