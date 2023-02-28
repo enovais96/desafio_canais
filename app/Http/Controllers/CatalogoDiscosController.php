@@ -63,8 +63,8 @@ class CatalogoDiscosController extends Controller {
 
     private function regrasListarCatalogoDiscos(): array{
         return [
-            'nome_disco'    => 'nullable|string|max:255',
-            'artista_disco'         => 'nullable|string|max:255',
+            'nome_disco'           => 'nullable|string|max:255',
+            'artista_disco'        => 'nullable|string|max:255',
             'ano_lancamento_disco' => 'nullable|integer|min:1000|max:9999',
             'estilo_disco'         => 'nullable|string|max:255'
         ];
@@ -72,11 +72,11 @@ class CatalogoDiscosController extends Controller {
 
     private function regrasCatalogoDiscos(): array{
         return [
-            'nome_disco'    => 'required|string|max:255',
-            'artista_disco'         => 'required|string|max:255',
+            'nome_disco'           => 'required|string|max:255',
+            'artista_disco'        => 'required|string|max:255',
             'ano_lancamento_disco' => 'required|integer|min:1000|max:9999',
             'estilo_disco'         => 'required|string|max:255',
-            'quantidade_disco' => 'required|integer'
+            'quantidade_disco'     => 'required|integer'
         ];
     }
 

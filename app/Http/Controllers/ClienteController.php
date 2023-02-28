@@ -63,21 +63,21 @@ class ClienteController extends Controller {
 
     private function regrasListarCliente(): array{
         return [
-            'nome_cliente'    => 'nullable|string|max:255',
-            'documento_cliente'         => 'nullable|string|max:30',
+            'nome_cliente'            => 'nullable|string|max:255',
+            'documento_cliente'       => 'nullable|string|max:30',
             'data_nascimento_cliente' => 'nullable|date',
-            'email_cliente'         => 'nullable|email|string|max:255',
-            'telefone_cliente' => 'nullable|integer'
+            'email_cliente'           => 'nullable|email|string|max:255',
+            'telefone_cliente'        => 'nullable|integer'
         ];
     }
 
     private function regrasCliente(): array{
         return [
-            'nome_cliente'    => 'required|string|max:255',
-            'documento_cliente'         => 'required|string|max:30',
+            'nome_cliente'            => 'required|string|max:255',
+            'documento_cliente'       => 'required|string|max:30',
             'data_nascimento_cliente' => 'required|date',
-            'email_cliente'         => 'required|email|string|max:255',
-            'telefone_cliente' => 'required|integer'
+            'email_cliente'           => 'required|email|string|max:255',
+            'telefone_cliente'        => 'required|integer'
         ];
     }
 
