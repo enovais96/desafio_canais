@@ -28,7 +28,6 @@ class ClienteController extends Controller {
         return new JsonResponse($this->response);
     }
 
-
     public function cadastrar(Request $request) {
         $validator = Validator::make($request->all(), $this->regrasCliente());
         if ($validator->fails()) {

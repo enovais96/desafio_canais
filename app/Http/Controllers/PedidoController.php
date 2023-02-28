@@ -14,6 +14,9 @@ class PedidoController extends Controller {
      */
     private $service;
 
+    /**
+     * @var
+     */
     private $serviceCatalogo;
 
     public function __construct(PedidoServiceInterface $service, CatalogoDiscosServiceInterface $serviceCatalogo) {
@@ -31,7 +34,6 @@ class PedidoController extends Controller {
 
         return new JsonResponse($this->response);
     }
-
 
     public function cadastrar(Request $request) {
         $validator = Validator::make($request->all(), $this->regrasPedido());

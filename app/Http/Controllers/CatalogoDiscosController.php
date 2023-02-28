@@ -28,7 +28,6 @@ class CatalogoDiscosController extends Controller {
         return new JsonResponse($this->response);
     }
 
-
     public function cadastrar(Request $request) {
         $validator = Validator::make($request->all(), $this->regrasCatalogoDiscos());
         if ($validator->fails()) {

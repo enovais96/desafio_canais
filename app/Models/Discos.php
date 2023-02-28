@@ -8,6 +8,7 @@ class Discos extends Model {
 
     protected $table = 'discos';
     protected $primaryKey = 'id_disco';
+
     protected $fillable = [
         'id_disco',
         'nome_disco',

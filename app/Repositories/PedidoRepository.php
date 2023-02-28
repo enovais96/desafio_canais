@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Models\Pedido;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Date;
 
 class PedidoRepository implements Contracts\PedidoRepositoryInterface {
 

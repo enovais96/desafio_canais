@@ -8,6 +8,7 @@ class Pedido extends Model {
 
     protected $table = 'pedido';
     protected $primaryKey = 'id_pedido';
+
     protected $fillable = [
         'id_pedido',
         'id_cliente',

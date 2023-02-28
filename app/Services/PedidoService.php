@@ -3,10 +3,8 @@
 namespace App\Services;
 
 use App\Models\Pedido;
-use App\Repositories\Contracts\CatalogoDiscosRepositoryInterface;
 use App\Repositories\Contracts\PedidoRepositoryInterface;
 use Illuminate\Support\Collection;
-use function PHPUnit\Framework\isNull;
 
 class PedidoService implements Contracts\PedidoServiceInterface {
 
