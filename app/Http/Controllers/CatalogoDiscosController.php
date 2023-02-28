@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Requests\CatalogosDiscosRequest;
 use App\Services\Contracts\CatalogoDiscosServiceInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -18,22 +17,58 @@ class CatalogoDiscosController extends Controller {
         $this->service = $service;
     }
 
-    public function listar() {
-        $this->response['data'] = $this->service->listarCatalogoDiscos();
+    public function listar(Request $request) {
+        $validator = Validator::make($request->all(), $this->regrasListarCatalogoDiscos());
+        if ($validator->fails()) {
+            return new JsonResponse($validator->messages(), 400);
+        }
+
+        $this->response['data'] = $this->service->listarCatalogoDiscos($request->only($this->camposPermitidos()));
 
         return new JsonResponse($this->response);
     }
 
 
     public function cadastrar(Request $request) {
-        $validator = Validator::make($request->all(), $this->regrasCatalogoDiscos(), $this->mensagemRegrasCatalogoDiscos());
+        $validator = Validator::make($request->all(), $this->regrasCatalogoDiscos());
         if ($validator->fails()) {
             return new JsonResponse($validator->messages(), 400);
         }
 
-        $this->response['data'] = $this->service->salvarCatalogoDiscos($request->all());
+        $this->response['data'] = $this->service->salvarCatalogoDiscos($request->only($this->camposPermitidos()));
 
         return new JsonResponse($this->response);
+    }
+
+    public function atualizar(int $id_disco, Request $request) {
+        $validator = Validator::make($request->all(), $this->regrasCatalogoDiscos());
+        if ($validator->fails()) {
+            return new JsonResponse($validator->messages(), 400);
+        }
+
+        $this->response['data'] = ($this->service->atualizarCatalogoDiscos($id_disco, $request->only($this->camposPermitidos()))) ? 'Disco atualizado com sucesso' : 'Falha ao atualizar o disco';
+
+        return new JsonResponse($this->response);
+    }
+
+    public function deletar(Request $request) {
+        $validator = Validator::make($request->all(), $this->regrasDeletarCatalogoDiscos());
+        if ($validator->fails()) {
+            return new JsonResponse($validator->messages(), 400);
+        }
+
+        $this->response['data'] = ($this->service->deletarCatalogoDiscos($request->only($this->camposPermitidos()))) ? 'Disco deletado com sucesso' : 'Falha ao deletar o disco';
+
+        return new JsonResponse($this->response);
+    }
+
+    private function regrasListarCatalogoDiscos(): array{
+        return [
+            'nome_disco'    => 'nullable|string|max:255',
+            'artista_disco'         => 'nullable|string|max:255',
+            'ano_lancamento_disco' => 'nullable|integer|min:1000|max:9999',
+            'estilo_disco'         => 'nullable|string|max:255'
+        ];
     }
 
     private function regrasCatalogoDiscos(): array{
@@ -46,15 +81,20 @@ class CatalogoDiscosController extends Controller {
         ];
     }
 
-    private function mensagemRegrasCatalogoDiscos(): array{
+    private function regrasDeletarCatalogoDiscos(): array {
         return [
-            'required'=> 'O campo :attribute é obrigatório.',
-            'size'    => 'O campo :attribute deve conter no máximo o tamanho :size.',
-            'between' => 'O campo :attribute deve estar entre :min - :max.',
-            'min' => 'O campo :attribute deve ter o tamanho minímo de :min',
-            'max' => 'O campo :attribute deve ter o tamanho máximo de :max',
-            'string' => 'O campo :attribute deve ser do tipo string',
-            'integer' => 'O campo :attribute deve ser do tipo integer'
+            'id_disco' => 'required|exists:discos,id_disco'
+        ];
+    }
+
+    private function camposPermitidos(): array {
+        return [
+            'id_disco',
+            'nome_disco',
+            'artista_disco',
+            'ano_lancamento_disco',
+            'estilo_disco',
+            'quantidade_disco'
         ];
     }
 }

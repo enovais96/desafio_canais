@@ -3,12 +3,14 @@
 namespace App\Services\Contracts;
 
 use App\Models\Discos;
-use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
 interface CatalogoDiscosServiceInterface {
-    function listarCatalogoDiscos(): Collection;
+    function listarCatalogoDiscos(Array $request): Collection;
 
     function salvarCatalogoDiscos(Array $request): Discos;
 
+    function atualizarCatalogoDiscos(int $id_disco, Array $request): bool;
+
+    function deletarCatalogoDiscos(Array $request): bool;
 }
