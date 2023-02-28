@@ -29,4 +29,25 @@ class CatalogoDiscosService implements Contracts\CatalogoDiscosServiceInterface 
         return $this->repository->deletarCatalogoDiscos($request);
     }
 
+    public function disponibiliadeEstoque(Array $request): bool {
+        $disco_atualizado = array();
+        $disco = $this->repository->listarCatalogoDiscos(array('id_disco' => $request['id_disco']));
+
+        if($disco[0]->quantidade_disco >= $request['quantidade_disco']){
+            $disco_atualizado['quantidade_disco'] = $disco[0]->quantidade_disco - $request['quantidade_disco'];
+
+            return $this->atualizarCatalogoDiscos($request['id_disco'], $disco_atualizado);
+        }
+
+        return false;
+    }
+
+    function voltarParaEstoquePedidoCancelado(Collection $request): bool {
+        $disco_atualizado = array();
+        $disco = $this->repository->listarCatalogoDiscos(array('id_disco' => $request[0]->id_disco));
+
+        $disco_atualizado['quantidade_disco'] = $disco[0]->quantidade_disco + $request[0]->quantidade_disco;
+
+        return $this->atualizarCatalogoDiscos($request[0]->id_disco, $disco_atualizado);
+    }
 }

@@ -13,4 +13,8 @@ interface CatalogoDiscosServiceInterface {
     function atualizarCatalogoDiscos(int $id_disco, Array $request): bool;
 
     function deletarCatalogoDiscos(Array $request): bool;
+
+    function disponibiliadeEstoque(Array $request): bool;
+
+    function voltarParaEstoquePedidoCancelado(Collection $request): bool;
 }

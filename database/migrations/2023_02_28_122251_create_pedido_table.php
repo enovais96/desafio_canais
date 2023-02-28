@@ -17,7 +17,7 @@ class CreatePedidoTable extends Migration
             $table->id('id_pedido');
             $table->unsignedBigInteger('id_cliente');
             $table->unsignedBigInteger('id_disco');
-            $table->integer('quantidade');
+            $table->integer('quantidade_disco');
             $table->foreign('id_cliente')->references('id_cliente')->on('cliente');
             $table->foreign('id_disco')->references('id_disco')->on('discos');
             $table->timestamps();

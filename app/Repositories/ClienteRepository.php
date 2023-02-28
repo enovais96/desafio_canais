@@ -18,11 +18,11 @@ class ClienteRepository implements Contracts\ClienteRepositoryInterface {
         return $this->model()::create($request);
     }
 
-    function atualizarCliente(int $id_cliente, Array $request): bool {
+    public function atualizarCliente(int $id_cliente, Array $request): bool {
         return $this->model()::where('id_cliente', $id_cliente)->update($request);
     }
 
-    function deletarCliente(Array $request): bool {
+    public function deletarCliente(Array $request): bool {
         $cliente = $this->model()::where($request)->first();
 
         return $cliente->delete();

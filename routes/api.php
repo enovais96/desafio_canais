@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CatalogoDiscosController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\PedidoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +31,8 @@ Route::get('cliente', [ClienteController::class, 'listar']);
 Route::post('cliente', [ClienteController::class, 'cadastrar']);
 Route::put('cliente/{id_cliente}', [ClienteController::class, 'atualizar']);
 Route::delete('cliente', [ClienteController::class, 'deletar']);
+
+Route::get('pedido', [PedidoController::class, 'listar']);
+Route::post('pedido', [PedidoController::class, 'cadastrar']);
+Route::put('pedido/{id_pedido}', [PedidoController::class, 'atualizar']);
+Route::delete('pedido', [PedidoController::class, 'deletar']);
